@@ -13,7 +13,7 @@ DB = connection.db('test')
 
 RSpec.configure do |c|
   c.before(:each) do
-    DB.collections.each do |collection|
+    DB.collections.reject{|x| x.name =~ /\Asystem/}.each do |collection|
       collection.remove
       collection.drop_indexes
     end
